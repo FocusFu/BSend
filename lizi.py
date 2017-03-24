@@ -1,10 +1,3 @@
-import datetime
-
-starttime = datetime.datetime.now()
-
-a=4
-
-endtime = datetime.datetime.now()
-
-interval = (endtime - starttime).seconds
-print interval
+A = 'obj.png'
+B = A[:-4]+'.gif'
+print B

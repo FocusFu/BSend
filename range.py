@@ -5,7 +5,7 @@ imageData是存储图像向量的列表
 addressList是存放图像名字的列表
 输出：
 rangeImage是排列之后的图像
-rangeList书偶爱咧之后的名单
+rangeList是排列之后的名单
 '''
 #不知道为什么，图片的顺序是乱的，这个文件主要整理一下顺序
 def arrangeData(imageData,addressList):
@@ -20,4 +20,4 @@ def arrangeData(imageData,addressList):
             j = j * 72 + int(addressList[i][6])*10+int(addressList[i][7])
         rangeImage[j]=imageData[i]
         rangeList[j]=addressList[i]
-    return rangeImage,rangeList
+    return rangeImage, rangeList
