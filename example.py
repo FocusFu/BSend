@@ -3,12 +3,17 @@ from Tkinter import *
 from ttk import *
 import tkFileDialog
 import tkMessageBox
+import transGif
 from biaoge import *
 import openPic
+import display
 import range
+import randpic
 def opePic(nameList):
     global dataList, addressList
     dataList, addressList = openPic.openPictures(nameList)
+    aaalist = randpic.randim(addressList)
+    display.displaypic(root, 0, aaalist)
 def autherInf():
     tkMessageBox.showinfo("作者信息", "作者：符志强\r学号：13212002")
 def selectPic():#选择要进行分类的图片
@@ -69,7 +74,7 @@ l10 = Label(root , text = "准确率：").grid(row = rowNumber + 24, column = co
 text1 = Label(root, width = 11).grid(row = rowNumber + 24, column = columnNumber + 1)
 l11 = Label(root , text = "时间：").grid(row = rowNumber + 24, column = columnNumber + 2)
 text2 = Label(root, width = 11).grid(row = rowNumber + 24, column = columnNumber + 3)
-filename = 'E:\obj.gif'
-img = PhotoImage(file = filename)
-label = Label(root, image = img).grid(row = rowNumber + 5, column = columnNumber + 1, rowspan = 10, columnspan = 5)
+#filename = 'E:\obj.gif'
+#img = PhotoImage(file = filename)
+#label = Label(root, image = img).grid(row = rowNumber + 5, column = columnNumber + 1, rowspan = 3, columnspan = 1)
 root.mainloop()

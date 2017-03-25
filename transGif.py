@@ -6,12 +6,15 @@
 '''
 from PIL import Image
 def transPic(list):
+    outlist = []
     for i in list:
-        infile = 'E:\BS\\' + i
-        outfile = 'E:\BS\\' + i[:-4] + '.gif'
+        infile = 'test2\\' + i
+        outfile = 'test2\\' + i[:-4] + '.gif'
+        outlist.append(outfile)
         im = Image.open(infile)
         out = im.resize((64,64),Image.ANTIALIAS)
         out.save(outfile)
+    return outlist
 '''
 infile = 'E:\obj1__0.png'
 outfile = 'E:\obj.png'
