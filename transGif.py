@@ -9,7 +9,7 @@ def transPic(list):
     outlist = []
     for i in list:
         infile = 'test2\\' + i
-        outfile = 'test2\\' + i[:-4] + '.gif'
+        outfile = 'gif\\' + i[:-4] + '.gif'
         outlist.append(outfile)
         im = Image.open(infile)
         out = im.resize((64,64),Image.ANTIALIAS)

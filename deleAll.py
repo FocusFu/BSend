@@ -23,3 +23,4 @@ def CleanAll(file_ext, file_address):
         for file in object_file_list:
             os.remove(file)
         os.chdir(pwd)
+CleanAll('.gif', 'D:\BSend\test2')
