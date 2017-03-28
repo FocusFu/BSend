@@ -14,7 +14,7 @@ def getAllImages(folder):
 def openPictures(address):
     addressList = getAllImages(address)
     dataList = []
-    for i in xrange(0 , len(addressList)):
+    for i in xrange(0, len(addressList)):
         im = imread('test2/'+addressList[i])
         dataList.append(im.T)
     return dataList, addressList

@@ -12,7 +12,7 @@ def transPic(list):
         outfile = 'gif\\' + i[:-4] + '.gif'
         outlist.append(outfile)
         im = Image.open(infile)
-        out = im.resize((64,64),Image.ANTIALIAS)
+        out = im.resize((64, 64), Image.ANTIALIAS)
         out.save(outfile)
     return outlist
 '''
