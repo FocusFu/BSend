@@ -20,10 +20,10 @@ def timing():#测试时间
 
 
 def opePic(nameList):#打开图片
-    global dataList, addressList, dislist, rLabel
+    global dataList, addressList, dislist, rLabel, disnum
     dislist = []
     dataList, addressList = openPic.openPictures(nameList)
-    aaalist = randpic.randim(addressList)
+    aaalist, disnum = randpic.randim(addressList)
     aaalist = transGif.transPic(aaalist)
     for i in xrange(len(aaalist)):
         dislist.append(PhotoImage(file=aaalist[i]))
@@ -41,10 +41,11 @@ def selectPic():#选择要进行分类的图片
 
 def bpcab(w, datalist, e):
     global reData
+
     f = []
     aa = []
     s = e.get()
-    ld = Label(root, text=s).grid(row=rowNumber + 22, column=columnNumber + 1)
+    ld = Label(root, text=s).grid(row=rowNumber + 20, column=columnNumber + 1)
     #dataList, reData = rd.myPCA(datalist, s)
     for i in xrange(len(datalist)):
         aa = rd.myPCA(datalist[i], s)
@@ -55,17 +56,18 @@ def bpcab(w, datalist, e):
 
 def pcabut(root, datalist):
     w = Toplevel(root)
-    root.wm_title("PCA参数设置")
+    w.wm_title("PCA参数设置")
     w.resizable(width=0, height=0)
+    lpca = Label(w, text='PCA参数设置').grid(row=0, column=0)
     e = IntVar()#StringVar()
     ln = Label(w, text="保留维数：")\
-        .grid(row=0, column=0, sticky=W)
+        .grid(row=1, column=0, sticky=W)
     cc = Entry(w, textvariable=e)\
-        .grid(row=0, column=1, sticky=E)
+        .grid(row=1, column=1, sticky=E)
     lname = Label(root, text="PCA")\
         .grid(row=rowNumber + 19, column=columnNumber + 1)
     bb = Button(w, text="确认", command=lambda: bpcab(w, datalist, e))\
-        .grid(row=1, column=1, sticky=E)
+        .grid(row=2, column=1, sticky=E)
 
 
 def bipcab(w, datalist, e):
@@ -84,17 +86,17 @@ def bipcab(w, datalist, e):
 def ipcabut(root, datalist):
     w = Toplevel(root)
     #w.geometry('100x100+100+50')
-    root.wm_title("IncrementalPCA参数设置")
+    w.wm_title("IncrementalPCA参数设置")
     w.resizable(width=0, height=0)
     e = IntVar()
     ln = Label(w, text="保留维数：")\
-        .grid(row=0, column=0, sticky=W)
+        .grid(row=1, column=0, sticky=W)
     cc = Entry(w, textvariable=e)\
-        .grid(row=0, column=1, sticky=E)
+        .grid(row=1, column=1, sticky=E)
     lname = Label(root, text="IncrementalPCA")\
         .grid(row=rowNumber + 19, column=columnNumber + 1)
     bb = Button(w, text="确认", command=lambda: bipcab(w, datalist, e))\
-        .grid(row=1, column=1, sticky=E)
+        .grid(row=2, column=1, sticky=E)
 
 
 def bkpcab(w, datalist, e):
@@ -113,7 +115,7 @@ def bkpcab(w, datalist, e):
 def kpcabut(root, datalist):
     w = Toplevel(root)
     #w.geometry('100x100+100+50')
-    root.wm_title("KernelPCA参数设置")
+    w.wm_title("KernelPCA参数设置")
     w.resizable(width=0, height=0)
     e = IntVar()
     ln = Label(w, text="保留维数：")\
@@ -127,8 +129,93 @@ def kpcabut(root, datalist):
 
 
 
+def bfab(w, datalist, e):
+    global reData
+    f = []
+    aa = []
+    s = e.get()
+    ld = Label(root, text=s).grid(row=rowNumber + 22, column=columnNumber + 1)
+    for i in xrange(len(datalist)):
+        aa = rd.myFactorAnalysis(datalist[i], s)
+        f.append(aa)
+    reData = f
+    w.destroy()
+
+
+def fabut(root, datalist):
+    w = Toplevel(root)
+    #w.geometry('100x100+100+50')
+    w.wm_title("FA参数设置")
+    w.resizable(width=0, height=0)
+    e = IntVar()
+    ln = Label(w, text="保留维数：")\
+        .grid(row=0, column=0, sticky=W)
+    cc = Entry(w, textvariable=e)\
+        .grid(row=0, column=1, sticky=E)
+    lname = Label(root, text="FactorAnalysis")\
+        .grid(row=rowNumber + 19, column=columnNumber + 1)
+    bb = Button(w, text="确认", command=lambda: bfab(w, datalist, e))\
+        .grid(row=1, column=1, sticky=E)
+
+
+def bfib(w, datalist, e):
+    global reData
+    f = []
+    aa = []
+    s = e.get()
+    ld = Label(root, text=s).grid(row=rowNumber + 22, column=columnNumber + 1)
+    for i in xrange(len(datalist)):
+        aa = rd.myFastICA(datalist[i], s)
+        f.append(aa)
+    reData = f
+    w.destroy()
+
+
+def fibut(root, datalist):
+    w = Toplevel(root)
+    #w.geometry('100x100+100+50')
+    w.wm_title("FI参数设置")
+    w.resizable(width=0, height=0)
+    e = IntVar()
+    ln = Label(w, text="保留维数：")\
+        .grid(row=0, column=0, sticky=W)
+    cc = Entry(w, textvariable=e)\
+        .grid(row=0, column=1, sticky=E)
+    lname = Label(root, text="FastICA")\
+        .grid(row=rowNumber + 19, column=columnNumber + 1)
+    bb = Button(w, text="确认", command=lambda: bfib(w, datalist, e))\
+        .grid(row=1, column=1, sticky=E)
+
+def bnmfb(w, datalist, e):
+    global reData
+    f = []
+    aa = []
+    s = e.get()
+    ld = Label(root, text=s).grid(row=rowNumber + 22, column=columnNumber + 1)
+    for i in xrange(len(datalist)):
+        aa = rd.myNMF(datalist[i], s)
+        f.append(aa)
+    reData = f
+    w.destroy()
+
+
+def nmfbut(root, datalist):
+    w = Toplevel(root)
+    #w.geometry('100x100+100+50')
+    w.wm_title("NMF参数设置")
+    w.resizable(width=0, height=0)
+    e = IntVar()
+    ln = Label(w, text="保留维数：")\
+        .grid(row=0, column=0, sticky=W)
+    cc = Entry(w, textvariable=e)\
+        .grid(row=0, column=1, sticky=E)
+    lname = Label(root, text="NMF")\
+        .grid(row=rowNumber + 19, column=columnNumber + 1)
+    bb = Button(w, text="确认", command=lambda: bnmfb(w, datalist, e))\
+        .grid(row=1, column=1, sticky=E)
+
 def bkmeansb(w, datalist, e):
-    global rLabel
+    global rLabel, addressList, Dislist
     lname2 = Label(root, text="Kmeans") \
         .grid(row=rowNumber + 19, column=columnNumber + 5)
     s = e.get()
@@ -144,6 +231,11 @@ def bkmeansb(w, datalist, e):
     shapeData = shapeData.reshape(len(addressList), 128 * dataShape[0])
     rLabel = clu.myKmeans(shapeData, s)
     print rLabel
+    Dislist = []
+    bbbList = transGif.transPic(addressList)
+    for i in xrange(len(addressList)):
+        Dislist.append(PhotoImage(file=bbbList[i]))
+    display.displaypic(root, 1, Dislist, rLabel)
     w.destroy()
 
 
@@ -161,7 +253,44 @@ def kmeansbut(root, datalist):
     bb = Button(w, text="确认", command=lambda: bkmeansb(w, datalist, e))\
         .grid(row=1, column=1, sticky=E)
 
+def bapb(w, datalist, e):
+    global rLabel, addressList, Dislist
+    lname2 = Label(root, text="AffinityPropagation") \
+        .grid(row=rowNumber + 19, column=columnNumber + 5)
+    s = e.get()
+    z = []
+    shapeData = []
+    for i in xrange(len(datalist)):
+        z = datalist[i]
+        z = z.T
+        dataShape = z.shape
+        z = z.reshape(1, 128 * dataShape[0])
+        shapeData.append(z)
+    shapeData = numpy.array(shapeData)
+    shapeData = shapeData.reshape(len(addressList), 128 * dataShape[0])
+    rLabel = clu.myAffinityPropagation(shapeData, s)
+    print rLabel
+    Dislist = []
+    bbbList = transGif.transPic(addressList)
+    for i in xrange(len(addressList)):
+        Dislist.append(PhotoImage(file=bbbList[i]))
+    display.displaypic(root, 1, Dislist, rLabel)
+    w.destroy()
 
+
+def apbut(root, datalist):
+    w = Toplevel(root)
+    w.wm_title("Kmeans参数设置")
+    w.resizable(width=0, height=0)
+    e = IntVar()
+    ln = Label(w, text="类别数：")\
+        .grid(row=0, column=0, sticky=W)
+    cc = Entry(w, textvariable=e)\
+        .grid(row=0, column=1, sticky=E)
+    lname2 = Label(root, text="Kmeans")\
+        .grid(row=rowNumber + 23, column=columnNumber + 1)
+    bb = Button(w, text="确认", command=lambda: bapb(w, datalist, e))\
+        .grid(row=1, column=1, sticky=E)
 global imageData
 global reData#降维数据
 global rLabel#分类结果
@@ -201,11 +330,11 @@ br2 = Button(root, text="IncrementalPCA", width=22, command=lambda: ipcabut(root
     .grid(row=rowNumber + 2, column=columnNumber+10, columnspan=2)
 br3 = Button(root, text="KernelPCA", width=22, command=lambda: kpcabut(root, dataList))\
     .grid(row=rowNumber + 3, column=columnNumber+10, columnspan=2)
-br4 = Button(root, text="FactorAnalysis", width=22)\
+br4 = Button(root, text="FactorAnalysis", width=22, command=lambda: fabut(root, dataList))\
     .grid(row=rowNumber+4, column=columnNumber+10, columnspan=2)
-br5 = Button(root, text="FastICA", width=22)\
+br5 = Button(root, text="FastICA", width=22, command=lambda: fibut(root, dataList))\
     .grid(row=rowNumber+5, column=columnNumber+10, columnspan=2)
-br6 = Button(root, text="NMF", width=22)\
+br6 = Button(root, text="NMF", width=22, command=lambda: nmfbut(root, dataList))\
     .grid(row=rowNumber+6, column=columnNumber+10, columnspan=2)
 br7 = Button(root, text="DictionaryLearning", width=22)\
     .grid(row=rowNumber+7, column=columnNumber+10, columnspan=2)
@@ -217,7 +346,7 @@ l4 = Label(root, text="聚类算法")\
     .grid(row=rowNumber+10, column=columnNumber + 10)
 bc1 = Button(root, text="Kmeans", width=22, command=lambda: kmeansbut(root, reData))\
     .grid(row=rowNumber+11, column=columnNumber+10, columnspan=2)
-bc2 = Button(root, text="Mean-shift", width=22)\
+bc2 = Button(root, text="AffinityPropagation", width=22, command=lambda: apbut(root, reData))\
     .grid(row=rowNumber+12, column=columnNumber+10, columnspan=2)
 bc3 = Button(root, text="Spectral clustering", width=22)\
     .grid(row=rowNumber+13, column=columnNumber+10, columnspan=2)

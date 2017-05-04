@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-‘
 #聚类算法暂时使用k-means
-from sklearn.cluster import KMeans , AffinityPropagation , MeanShift , estimate_bandwidth , SpectralClustering
+from sklearn.cluster import KMeans, AffinityPropagation, MeanShift, estimate_bandwidth, SpectralClustering
 from sklearn.cluster import AgglomerativeClustering
 def myKmeans(data,clusters):
     K_Means = KMeans(n_clusters=clusters, random_state=0, init='k-means++')
@@ -8,6 +8,7 @@ def myKmeans(data,clusters):
     reLabel = result.labels_
     return reLabel
 def myAffinityPropagation(data,clusters):
+    clusters = float(clusters)/10
     affinitypropagation = AffinityPropagation(damping=clusters, copy=True)
     result = affinitypropagation.fit(data)
     reLabel = result.labels_
