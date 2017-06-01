@@ -12,7 +12,7 @@ from sklearn.decomposition import TruncatedSVD
 import numpy as np
 
 
-def myPCA(data,percent):
+def myPCA(data, percent):
     pca = PCA(n_components=percent, copy=True, whiten=False, svd_solver='auto')
     lowDData = np.array(pca.fit_transform(data))
     return lowDData
